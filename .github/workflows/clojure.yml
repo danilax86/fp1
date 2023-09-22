@@ -31,13 +31,9 @@ jobs:
           clj-kondo: 2022.05.31        # Clj-kondo
           cljfmt: 0.10.2               # cljfmt
           cljstyle: 0.15.0             # cljstyle
-          
 
       - name: clj-kondo checks
-        uses: DeLaGuardo/clojure-lint-action@v1
-        with:
-          clj-kondo-args: --lint src test
-  
+        run: clj-kondo --lint src test
 
       - name: Get cljfmt version
         run: cljfmt --version
