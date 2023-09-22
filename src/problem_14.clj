@@ -1,8 +1,6 @@
 (ns problem-14
   (:gen-class))
 
-(def million 1000000)
-
 (defn apply-formula [n]
   (if (even? n)
     (quot n 2)
@@ -13,7 +11,7 @@
 ;; 1. Recursion and tail recursion
 
 ;; Recursion
-
+;; FIXME stackoverflow :(
 (def length-rec
   (memoize
    (fn [n]
@@ -22,12 +20,14 @@
        (= n 1)   1
        :else (inc (length-rec (apply-formula n)))))))
 
-(defn rec-solve [n]
+(defn solve
+  ([] (solve 1e6))
+  ([n]
   (letfn [(tuple [n] [n (length-rec n)])
           (maxf [a b]
             (if (> (second a)
                    (second b)) a b))]
-    (first (reduce maxf (map tuple (range 1 n))))))
+    (first (reduce maxf (map tuple (range 1 n)))))))
 
 
 ;; Tail recursion
