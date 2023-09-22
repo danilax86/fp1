@@ -20,8 +20,8 @@
        (= n 1)   1
        :else (inc (length-rec (apply-formula n)))))))
 
-(defn solve
-  ([] (solve 1e6))
+(defn solve-rec
+  ([] (solve-rec 1e6))
   ([n]
   (letfn [(tuple [n] [n (length-rec n)])
           (maxf [a b]
@@ -32,12 +32,42 @@
 
 ;; Tail recursion
 
+(defn solve-tail-rec
+  ([] (solve-tail-rec 1e6))
+  ([n]
+   n)) ;; todo
+
 
 ;; 2. Gen, filter, reduce
+
+(defn solve-gfr
+   ([] (solve-gfr 1e6))
+   ([n]
+    n)) ;; todo)
+
+
 ;; 3. Generation with map
+
+(defn solve-gm
+  ([] (solve-gm 1e6))
+  ([n]
+   n)) ;; todo)
+
+
 ;; 4. Special syntax for cycle
+
+(defn solve-cycle
+  ([] (solve-cycle 1e6))
+  ([n]
+   n)) ;; todo)
+
+
 ;; 5. Lazy collections
 
+(defn solve-lazy
+  ([] (solve-lazy 1e6))
+  ([n]
+   n)) ;; todo)
 
 ;; Traditional language
 
