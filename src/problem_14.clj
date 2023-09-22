@@ -22,14 +22,12 @@
        (= n 1)   1
        :else (inc (length-rec (apply-formula n)))))))
 
-(defn solve [n]
+(defn rec-solve [n]
   (letfn [(tuple [n] [n (length-rec n)])
           (maxf [a b]
             (if (> (second a)
                    (second b)) a b))]
     (first (reduce maxf (map tuple (range 1 n))))))
-
-(solve million)
 
 
 ;; Tail recursion
