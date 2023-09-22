@@ -1,6 +1,6 @@
 (ns problem-14-test
-  (:require [clojure.test :refer :all]
-            [problem-14 :refer :all]))
+  (:require [clojure.test :refer [deftest testing is]]
+            [problem-14 :refer [rec-solve million]]))
 
 (def input million)
 (def answer 837799)
