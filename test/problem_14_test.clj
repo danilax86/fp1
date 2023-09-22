@@ -1,4 +1,4 @@
-(ns test-14
+(ns problem-14-test
   (:require [clojure.test :refer :all]
             [problem-14 :refer :all]))
 
