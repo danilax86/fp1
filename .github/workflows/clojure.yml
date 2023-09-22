@@ -36,3 +36,6 @@ jobs:
 
       - name: clj-kondo checks
         run: clj-kondo --lint src test
+
+      - name: run-tests
+        run: clj -Atest
