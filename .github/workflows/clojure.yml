@@ -13,7 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Install dependencies
-      run: lein deps
+      run: echo "todo install deps"
+      
     - name: Run tests
-      run: lein test
+      run: clj -Atest
