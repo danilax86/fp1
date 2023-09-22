@@ -25,8 +25,8 @@
 (defn solve [n]
   (letfn [(tuple [n] [n (length-rec n)])
           (maxf [a b]
-                (if (> (second a)
-                       (second b)) a b))]
+            (if (> (second a)
+                   (second b)) a b))]
     (first (reduce maxf (map tuple (range 1 n))))))
 
 (solve million)
