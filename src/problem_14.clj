@@ -43,7 +43,10 @@
 (defn solve-gfr
    ([] (solve-gfr 1e6))
    ([n]
-    n)) ;; todo)
+    (first (reduce (fn [x y]
+              (if (> (second x) (second y)) x y))
+            (for [n (range 1 (inc n))]
+              [n (length-rec n)])))))
 
 
 ;; 3. Generation with map
