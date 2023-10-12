@@ -70,7 +70,7 @@
 (defn solve-lazy
   ([] (solve-lazy 1e6))
   ([n]
-   n)) ;; todo)
+   (apply max-key length-rec (range 1 n))))
 
 ;; Traditional language
 
