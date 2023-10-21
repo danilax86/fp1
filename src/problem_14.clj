@@ -6,8 +6,6 @@
     (quot n 2)
     (inc (* 3 n))))
 
-(apply-formula 40)
-
 ;; 1. Recursion and tail recursion
 
 ;; Recursion
