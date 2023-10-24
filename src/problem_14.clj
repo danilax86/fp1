@@ -2,8 +2,7 @@
   (:gen-class))
 
 ;; 1. Recursion
-
-;; Recursion
+;; This one returns len of colatz seq
 (defn length-rec
   [n]
   (if (= n 1)
@@ -12,7 +11,7 @@
       (inc (length-rec (quot n 2)))
       (inc (length-rec (inc (* 3 n)))))))
 
-;; Recursion
+;; This one returns colatz seq
 (defn colatz-seq [starting-number]
   (loop [n starting-number 
          xs (conj [] starting-number)]
@@ -28,7 +27,7 @@
   (loop [temp-n n 
          final-number 1 
          final-length 1]
-    (let [temp-length (count (colatz-seq temp-n))
+    (let [temp-length (count (colatz-seq temp-n)) ;; We can replace (count (colatz-seq temp-n)) with (lenght-rec temp-n)
           current-winner (if (> temp-length final-length)
                            temp-n
                            final-number)
