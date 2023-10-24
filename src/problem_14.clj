@@ -11,7 +11,7 @@
       (inc (length-rec (quot n 2)))
       (inc (length-rec (inc (* 3 n)))))))
 
-;; This one returns colatz seq
+;; This one returns colatz seq (recur is here)
 (defn colatz-seq [starting-number]
   (loop [n starting-number 
          xs (conj [] starting-number)]
@@ -24,20 +24,20 @@
 (defn solve-rec
   ([] (solve-rec 1000000))
   ([n]
-  (loop [temp-n n 
-         final-number 1 
-         final-length 1]
-    (let [temp-length (count (colatz-seq temp-n)) ;; We can replace (count (colatz-seq temp-n)) with (lenght-rec temp-n)
-          current-winner (if (> temp-length final-length)
-                           temp-n
-                           final-number)
-          final-length (max final-length temp-length)]
+   (letfn [(tuple [n] [n (length-rec n)])
+           (maxf [a b]
+             (if (> (second a)
+                    (second b)) a b))]
+     (first (reduce maxf (map tuple (range 1 n)))))))
 
-      (if (= 1 temp-n)
-        final-number
-        (recur (dec temp-n)
-               current-winner
-               final-length))))))
+(defn solve-rec-recur
+  ([] (solve-rec-recur 1000000))
+  ([n]
+   (letfn [(tuple [n] [n (count (colatz-seq n))])
+           (maxf [a b]
+             (if (> (second a)
+                    (second b)) a b))]
+     (first (reduce maxf (map tuple (range 1 n)))))))
 
 
 ;; 2. Gen, filter, reduce
