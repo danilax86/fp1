@@ -6,11 +6,9 @@
 
 (deftest test-14
   (testing "Recursion"
-    (is (= answer (p/solve-rec)))
-    (is (= answer (p/solve-tail-rec))))
+    (is (= answer (p/solve-rec))))
   (testing "Generation"
     (is (= answer (p/solve-gfr)))
     (is (= answer (p/solve-gm))))
-  (testing "Special")
-    (is (= answer (p/solve-cycle)))
-    (is (= answer (p/solve-lazy))))
+  (testing "Special"
+    (is (= answer (p/solve-lazy)))))

@@ -1,45 +1,49 @@
 (ns problem-14
   (:gen-class))
 
-(defn apply-formula [n]
-  (if (even? n)
-    (quot n 2)
-    (inc (* 3 n))))
-
-;; 1. Recursion and tail recursion
+;; 1. Recursion
 
 ;; Recursion
-;; FIXME stackoverflow :(
-(def length-rec
-  (memoize
-   (fn [n]
-     (cond
-       (<= n 0)  0
-       (= n 1)   1
-       :else (inc (length-rec (apply-formula n)))))))
+(defn length-rec
+  [n]
+  (if (= n 1)
+    1
+    (if (even? n)
+      (inc (length-rec (quot n 2)))
+      (inc (length-rec (inc (* 3 n)))))))
+
+;; Recursion
+(defn colatz-seq [starting-number]
+  (loop [n starting-number 
+         xs (conj [] starting-number)]
+    (if (= 1 n)
+      xs
+      (if (even? n)
+        (recur (quot n 2) (conj xs (quot n 2)))
+        (recur (inc (* n 3)) (conj xs (inc (* n 3))))))))
 
 (defn solve-rec
-  ([] (solve-rec 1e6))
+  ([] (solve-rec 1000000))
   ([n]
-  (letfn [(tuple [n] [n (length-rec n)])
-          (maxf [a b]
-            (if (> (second a)
-                   (second b)) a b))]
-    (first (reduce maxf (map tuple (range 1 n)))))))
+  (loop [temp-n n 
+         final-number 1 
+         final-length 1]
+    (let [temp-length (count (colatz-seq temp-n))
+          current-winner (if (> temp-length final-length)
+                           temp-n
+                           final-number)
+          final-length (max final-length temp-length)]
 
-
-;; Tail recursion
-
-(defn solve-tail-rec
-  ([] (solve-tail-rec 1e6))
-  ([n]
-   n)) ;; todo
+      (if (= 1 temp-n)
+        final-number
+        (recur (dec temp-n)
+               current-winner
+               final-length))))))
 
 
 ;; 2. Gen, filter, reduce
-
 (defn solve-gfr
-   ([] (solve-gfr 1e6))
+   ([] (solve-gfr 1000000))
    ([n]
     (first (reduce (fn [x y]
               (if (> (second x) (second y)) x y))
@@ -48,27 +52,17 @@
 
 
 ;; 3. Generation with map
-
 (defn solve-gm
-  ([] (solve-gm 1e6))
-  ([n]
-   n)) ;; todo)
-
-
-;; 4. Special syntax for cycle
-
-(defn solve-cycle
-  ([] (solve-cycle 1e6))
-  ([n]
-   n)) ;; todo)
+  ([] (solve-gm 1000000))
+   ([n]
+    (first (reduce (fn [x y]
+                     (if (> (second x) (second y)) x y))
+                   (for [n (map inc (take n (range)))]
+                     [n (length-rec n)])))))
 
 
 ;; 5. Lazy collections
-
 (defn solve-lazy
-  ([] (solve-lazy 1e6))
+  ([] (solve-lazy 1000000))
   ([n]
    (apply max-key length-rec (range 1 n))))
-
-;; Traditional language
-
