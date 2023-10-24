@@ -34,6 +34,3 @@
                    (count (filter (fn [char]
                                     (not (= char \space))) (convertNumToWord x))))
                  (take n (range))))))
-
-;; Traditional language
-
