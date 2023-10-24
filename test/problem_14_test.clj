@@ -6,7 +6,8 @@
 
 (deftest test-14
   (testing "Recursion"
-    (is (= answer (p/solve-rec))))
+    (is (= answer (p/solve-rec)))
+    (is (= answer (p/solve-rec-recur))))
   (testing "Generation"
     (is (= answer (p/solve-gfr)))
     (is (= answer (p/solve-gm))))
