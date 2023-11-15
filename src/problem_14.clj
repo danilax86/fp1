@@ -5,21 +5,20 @@
 ;; This one returns len of colatz seq
 (defn length-rec
   [n]
-  (if (= n 1)
-    1
-    (if (even? n)
-      (inc (length-rec (quot n 2)))
-      (inc (length-rec (inc (* 3 n)))))))
+  (cond 
+    (= n 1) 1
+    (even? n) (inc (length-rec (quot n 2))) 
+    :else (inc (length-rec (inc (* 3 n))))))
+
 
 ;; This one returns colatz seq (recur is here)
 (defn colatz-seq [starting-number]
   (loop [n starting-number 
          xs (conj [] starting-number)]
-    (if (= 1 n)
-      xs
-      (if (even? n)
-        (recur (quot n 2) (conj xs (quot n 2)))
-        (recur (inc (* n 3)) (conj xs (inc (* n 3))))))))
+    (cond 
+      (= 1 n) xs
+      (even? n) (recur (quot n 2) (conj xs (quot n 2))) 
+      :else (recur (inc (* n 3)) (conj xs (inc (* n 3)))))))
 
 (defn solve-rec
   ([] (solve-rec 1000000))
