@@ -26,11 +26,28 @@
 
         (> x 0) (nth nums x)))
 
+;; Infinite list of nums startings from 1
+(def num-list
+  (iterate inc 1))
 
 (defn solve 
-  ([] (solve 1001))
+  ([] (solve 1000))
   ([n]
   (reduce + (map (fn [x]
                    (count (filter (fn [char]
                                     (not (= char \space))) (convertNumToWord x))))
-                 (take n (range))))))
+                 (take n (drop 1 (range)))))))
+
+(defn solve-num-list
+  ([] (solve-num-list 1000))
+  ([n]
+   (reduce + (map (fn [x] (count (filter (fn [char] (not (= char \space))) (convertNumToWord x)))) (take n num-list)))))
+
+(comment
+  (take 5 num-list)
+  (take 5 (range))
+  
+  (solve)
+  (solve-num-list) 
+  )
+

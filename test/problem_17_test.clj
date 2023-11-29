@@ -6,4 +6,5 @@
 
 (deftest test-17
   (testing "General"
-    (is (= answer (p/solve)))))
+    (is (= answer (p/solve)))
+    (is (= answer (p/solve-num-list)))))
