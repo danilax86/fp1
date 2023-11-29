@@ -41,7 +41,10 @@
 (defn solve-num-list
   ([] (solve-num-list 1000))
   ([n]
-   (reduce + (map (fn [x] (count (filter (fn [char] (not (= char \space))) (convertNumToWord x)))) (take n num-list)))))
+   (reduce + (map (fn [x] 
+                    (count (filter (fn [char]
+                                     (not (= char \space))) (convertNumToWord x))))
+                  (take n num-list)))))
 
 (comment
   (take 5 num-list)
